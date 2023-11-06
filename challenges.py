@@ -60,3 +60,6 @@ def list_challenges(self):
             print("  No checks for this challenge.")
 
         print()  # Print a newline for better readability
+
+
+# + the checks part
