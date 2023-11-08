@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from datetime import datetime, timedelta
 
 
 class DataBaseOperations:
@@ -55,3 +56,37 @@ class ChallengesOperations(DataBaseOperations):
         except Exception as e:
             print(f"An error occurred: {e}")
             return []
+
+# TESTING.........................................................
+
+
+if __name__ == "__main__":
+
+    # TESTING ACTIVITIES
+
+    # Instantiate the class
+    # activities = ActivitiesOperations()
+
+    # Call a method of the class
+    # activities.insert_activity("Swimming")
+    # print(activities.get_all_activities())
+
+    # Close the database connection
+    # activities.close_connection()
+
+    # TESTING CHALLENGES ...........................................
+
+    # Instantiate the class
+    challenges = ChallengesOperations()
+
+    # Create a test challenge
+
+    # testChallenge = {'start_date': datetime.now(
+    # ), 'end_date': datetime.now() + timedelta(8), 'checks': {}}
+
+    # Call method to create a challenge
+
+    # challenges.create_challenge(testChallenge)
+    print(challenges.get_all_challenges())
+
+    challenges.close_connection()
