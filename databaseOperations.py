@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from datetime import datetime, timedelta
+from bson import ObjectId
 
 
 class DataBaseOperations:
@@ -57,9 +58,28 @@ class ChallengesOperations(DataBaseOperations):
             print(f"An error occurred: {e}")
             return []
 
+    def add_check_to_challenges(self, data):
+        """data {id: challenge id, activity id}"""
+        self.challenges_collection.update_one(
+            {'_id': data.get('_id')},
+            {'$push': {
+                f"checks.{data.get('activity_id')}": datetime.now()}}
+        )
+
+    def add_check_to_challenges(self, challenge_id_str, activity_id_str):
+        """Add a check to the challenges collection."""
+        # Convert strings to ObjectId
+        challenge_id = ObjectId(challenge_id_str)
+        activity_id = ObjectId(activity_id_str)
+
+        # Perform the update operation
+        self.challenges_collection.update_one(
+            {'_id': challenge_id},
+            {'$push': {f"checks.{activity_id}": datetime.now()}}
+        )
+
+
 # TESTING.........................................................
-
-
 if __name__ == "__main__":
 
     # TESTING ACTIVITIES
@@ -87,6 +107,8 @@ if __name__ == "__main__":
     # Call method to create a challenge
 
     # challenges.create_challenge(testChallenge)
-    print(challenges.get_all_challenges())
+    # print(challenges.get_all_challenges())
+    challenges.add_check_to_challenges(
+        '654c07707f7265fa073b039a', '65470e894a1aed46ecd79168')
 
     challenges.close_connection()
