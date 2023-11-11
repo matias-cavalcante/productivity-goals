@@ -3,9 +3,10 @@ from datetime import datetime, timedelta
 from bson import ObjectId
 
 
-class DataBaseOperations:
+class DataBaseConnector:
+    """Handles DB connections and provides connection to instances of itself"""
+
     def __init__(self):
-        # Initialize connection to MongoDB
         self.client = MongoClient('localhost', 27017)
         self.db = self.client['activity_tracker']
 
@@ -13,7 +14,9 @@ class DataBaseOperations:
         self.client.close()
 
 
-class ActivitiesOperations(DataBaseOperations):
+class ActivitiesOperations(DataBaseConnector):
+    """Connects to the DB & to the 'activities' collection. It´s methods interact with that collection"""
+
     def __init__(self):
         super().__init__()
         self.activities_collection = self.db.activities
@@ -36,7 +39,9 @@ class ActivitiesOperations(DataBaseOperations):
             return []
 
 
-class ChallengesOperations(DataBaseOperations):
+class ChallengesOperations(DataBaseConnector):
+    """Connects to the DB & to the 'activities' collection. It´s methods interact with that collection"""
+
     def __init__(self):
         super().__init__()
         self.challenges_collection = self.db.challenges
