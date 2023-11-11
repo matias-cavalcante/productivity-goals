@@ -48,6 +48,7 @@ class ChallengesOperations(DataBaseConnector):
 
     def create_challenge(self, challenge):
         """Create a challenge."""
+        # Challenges needs to be formated correctly
         try:
             result = self.challenges_collection.insert_one(challenge)
             return result.inserted_id
