@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 from databaseOperations import ActivitiesOperations
+from bson import json_util  # Import json_util from pymongo
+
 
 app = Flask(__name__)
 
@@ -18,8 +20,12 @@ def create_activity():
 
 @app.route('/seeactivities', methods=['GET'])
 def show_activities():
+    """Returns all activities of the activities collections in a JSON"""
     activities = activities_ops.get_all_activities()
-    return jsonify({"activities": activities}), 200
+    # Use json_util.dumps to serialize MongoDB documents to JSON
+    activities_json = json_util.dumps(activities)
+    # print(activities_json)
+    return jsonify(activities_json), 200
 
 
 if __name__ == '__main__':
