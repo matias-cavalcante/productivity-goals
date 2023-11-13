@@ -49,5 +49,14 @@ def new_challenge():
     return jsonify({"message": "Challenge received", "total days": total_days}), 200
 
 
+@app.route('/getonechallenge', methods=['GET'])
+def get_only_one_challenge():
+    id = request.get_json()
+    challenge_id = id.get('id')
+    challenge = challenges_ops.get_one_challenge(challenge_id)
+    print(challenge)
+    return challenge
+
+
 if __name__ == '__main__':
     app.run(debug=True)

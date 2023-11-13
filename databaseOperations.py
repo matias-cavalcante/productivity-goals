@@ -56,6 +56,25 @@ class ChallengesOperations(DataBaseConnector):
             print(f"An error occurred: {e}")
             return None
 
+    def get_one_challenge(self, challenge_id):
+        # Convert the string ID to a MongoDB ObjectId
+        challenge_object_id = ObjectId(challenge_id)
+
+        # Find the challenge by its ID
+        challenge = self.challenges_collection.find_one(
+            {"_id": challenge_object_id})
+
+        if challenge:
+            # Convert MongoDB's ObjectId and datetime objects to strings
+            challenge_data = {
+                "_id": str(challenge["_id"]),
+                "start_date": challenge["start_date"].isoformat(),
+                "end_date": challenge["end_date"].isoformat(),
+                # Using .get() to avoid KeyError if 'checks' doesn't exist
+                "checks": challenge.get("checks", {})
+            }
+            return challenge_data
+
     def get_all_challenges(self):
         """Return all challenges."""
         try:
@@ -114,7 +133,9 @@ if __name__ == "__main__":
 
     # challenges.create_challenge(testChallenge)
     # print(challenges.get_all_challenges())
-    challenges.add_check_to_challenges(
-        '654c07707f7265fa073b039a', '65470e894a1aed46ecd79168')
+    # challenges.add_check_to_challenges(
+    #    '654c07707f7265fa073b039a', '65470e894a1aed46ecd79168')
+
+    print(challenges.get_one_challenge('654c07707f7265fa073b039a'))
 
     challenges.close_connection()
