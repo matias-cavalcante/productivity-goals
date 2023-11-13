@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 from bson import ObjectId
+from flask import jsonify
 
 
 class DataBaseConnector:
@@ -57,23 +58,20 @@ class ChallengesOperations(DataBaseConnector):
             return None
 
     def get_one_challenge(self, challenge_id):
-        # Convert the string ID to a MongoDB ObjectId
         challenge_object_id = ObjectId(challenge_id)
-
-        # Find the challenge by its ID
         challenge = self.challenges_collection.find_one(
             {"_id": challenge_object_id})
-
         if challenge:
-            # Convert MongoDB's ObjectId and datetime objects to strings
+            # Prepare the challenge data for JSON serialization
             challenge_data = {
                 "_id": str(challenge["_id"]),
                 "start_date": challenge["start_date"].isoformat(),
                 "end_date": challenge["end_date"].isoformat(),
-                # Using .get() to avoid KeyError if 'checks' doesn't exist
                 "checks": challenge.get("checks", {})
             }
             return challenge_data
+        else:
+            return None  # Challenge not found
 
     def get_all_challenges(self):
         """Return all challenges."""
