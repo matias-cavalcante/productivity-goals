@@ -24,6 +24,7 @@ def create_activity():
 
 @app.route('/seeactivities', methods=['GET'])
 def show_activities():
+    # This function does not require an ID
     """Returns all activities of the activities collections in a JSON"""
     activities = activities_ops.get_all_activities()
     # Use json_util.dumps to serialize MongoDB documents to JSON
@@ -51,12 +52,24 @@ def new_challenge():
 
 @app.route('/getchallenge/<challenge_id>', methods=['GET'])
 def get_only_one_challenge(challenge_id):
+    # This function requires an ID
     challenge = challenges_ops.get_one_challenge(challenge_id)
     if challenge:
         # Flask converts the dictionary to a JSON response
         return jsonify(challenge)
     else:
         return jsonify({"error": "Challenge not found"}), 404
+
+
+@app.route('/addcheck', methods=['POST'])
+def check_in_challenge():
+    data = request.get_json()
+    activity_id = data.get('activity')
+    # Initially challenge will be filled assuming is the current one. Later user will choose
+    challenge_id = data.get('challenge')
+    adding_check = challenges_ops.add_check_to_challenges(
+        challenge_id, activity_id)
+    return jsonify({"message": "Check added"}), 200
 
 
 if __name__ == '__main__':
