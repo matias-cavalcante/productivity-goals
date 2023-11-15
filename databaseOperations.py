@@ -81,16 +81,8 @@ class ChallengesOperations(DataBaseConnector):
             print(f"An error occurred: {e}")
             return []
 
-    def add_check_to_challenges(self, data):
-        """data {id: challenge id, activity id}"""
-        self.challenges_collection.update_one(
-            {'_id': data.get('_id')},
-            {'$push': {
-                f"checks.{data.get('activity_id')}": datetime.now()}}
-        )
-
-    def add_check_to_challenges(self, challenge_id_str, activity_id_str):
-        """Add a check to the challenges collection."""
+    """def add_check_to_challenges(self, challenge_id_str, activity_id_str):
+        #Add a check to the challenges collection.
         # Convert strings to ObjectId
         challenge_id = ObjectId(challenge_id_str)
         activity_id = ObjectId(activity_id_str)
@@ -99,7 +91,36 @@ class ChallengesOperations(DataBaseConnector):
         self.challenges_collection.update_one(
             {'_id': challenge_id},
             {'$push': {f"checks.{activity_id}": datetime.now()}}
-        )
+        )"""
+
+    def find_current_ongoing_challenge_id(self):
+        """Find the current ongoing challenge based on the current date."""
+        current_date = datetime.now()
+        ongoing_challenge = self.challenges_collection.find_one({
+            'start_date': {'$lte': current_date},
+            'end_date': {'$gte': current_date}
+        })
+        if ongoing_challenge:
+            return ongoing_challenge['_id']
+        else:
+            # Handle the case where no ongoing challenge is found
+            return None
+
+    def add_check_to_challenges(self, activity_id_str, challenge_id_str=None):
+        """Add a check to the challenges collection."""
+        activity_id = ObjectId(activity_id_str)
+
+        if challenge_id_str:
+            challenge_id = ObjectId(challenge_id_str)
+        else:
+            challenge_id = self.find_current_ongoing_challenge_id()
+
+        if challenge_id:
+            # Perform the update operation
+            self.challenges_collection.update_one(
+                {'_id': challenge_id},
+                {'$push': {f"checks.{activity_id}": datetime.now()}}
+            )
 
 
 # TESTING.........................................................

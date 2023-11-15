@@ -61,6 +61,7 @@ def get_only_one_challenge(challenge_id):
         return jsonify({"error": "Challenge not found"}), 404
 
 
+"""
 @app.route('/addcheck', methods=['POST'])
 def check_in_challenge():
     data = request.get_json()
@@ -69,6 +70,19 @@ def check_in_challenge():
     challenge_id = data.get('challenge')
     adding_check = challenges_ops.add_check_to_challenges(
         challenge_id, activity_id)
+    return jsonify({"message": "Check added"}), 200
+"""
+
+
+@app.route('/addcheck', methods=['POST'])
+def check_in_challenge():
+    """Im trying this method"""
+    data = request.get_json()
+    activity_id = data.get('activity')
+    # challenge_id is optional in the request
+    challenge_id = data.get('challenge', None)  # None if not provided
+    adding_check = challenges_ops.add_check_to_challenges(
+        activity_id, challenge_id)
     return jsonify({"message": "Check added"}), 200
 
 
