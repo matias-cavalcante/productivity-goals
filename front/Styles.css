@@ -1,0 +1,26 @@
+#main-screen{
+    display: flex;
+}
+
+#buttons-menu{
+    background-color: red;
+    width: fit-content;
+}
+
+button{
+    width: 150px;
+    padding: 5px;
+    display: block;
+    margin-bottom: 10px;
+
+    background-color: rgb(89, 89, 171);
+    color:white;
+
+    border: 0;
+}
+
+#content-panel{
+    height: 350px;
+    width: 400px;
+    background-color: green;
+}
