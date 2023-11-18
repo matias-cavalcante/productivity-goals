@@ -3,8 +3,11 @@ from databaseOperations import ActivitiesOperations, ChallengesOperations
 from bson import json_util  # Import json_util from pymongo
 from datetime import datetime, timedelta
 
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
 activities_ops = ActivitiesOperations()
 challenges_ops = ChallengesOperations()
