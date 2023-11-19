@@ -1,3 +1,4 @@
+/*Addactivity is pretty equal to Startchallenge*/
 /*Add activity block*/
 document.addEventListener("DOMContentLoaded", function () {
     var myInput = document.getElementById("myInput");
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-/*Get activities code*/
+/*Get activities block*/
 document.addEventListener("DOMContentLoaded", function () {
     var button = document.getElementById('seeactivity');
     button.addEventListener('click', function () {
@@ -29,6 +30,28 @@ document.addEventListener("DOMContentLoaded", function () {
             headers: {
                 'Content-Type': 'application/json',
             },
+        })
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+            console.log('Success:', data);
+        })
+            .catch(function (error) {
+            console.error('Error:', error);
+        });
+    });
+});
+/*Create a new challenge block*/
+document.addEventListener("DOMContentLoaded", function () {
+    var daysInput = document.getElementById('quantity');
+    var button = document.getElementById('startchallenge');
+    button.addEventListener('click', function () {
+        var challengeDays = daysInput.value; // Get the value from the input field
+        fetch('http://127.0.0.1:5000/createchallenge', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ days: challengeDays }) // Convert the activity object to a JSON string
         })
             .then(function (response) { return response.json(); })
             .then(function (data) {

@@ -1,3 +1,5 @@
+/*Addactivity is pretty equal to Startchallenge*/
+
 /*Add activity block*/ 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-/*Get activities code*/
+/*Get activities block*/
 document.addEventListener("DOMContentLoaded", () => {
     const button = document.getElementById('seeactivity') as HTMLButtonElement;
 
@@ -43,4 +45,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+/*Create a new challenge block*/
+document.addEventListener("DOMContentLoaded", () => {
+    const daysInput = document.getElementById('quantity') as HTMLInputElement
+    const button = document.getElementById('startchallenge') as HTMLButtonElement;
+
+    button.addEventListener('click', () => {
+        const challengeDays = daysInput.value; // Get the value from the input field
+        fetch('http://127.0.0.1:5000/createchallenge', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ days: challengeDays }) // Convert the activity object to a JSON string
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+});
+
 
