@@ -94,3 +94,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+/*Add a check to a challenge (pass challenge id optional, if not it uses date to find one)*/
+
+document.addEventListener("DOMContentLoaded", () => {
+    const challengeInput = document.getElementById("challengeid") as HTMLInputElement;
+    const activityInput = document.getElementById("activityid") as HTMLInputElement;
+
+    const button = document.getElementById('addcheck') as HTMLButtonElement;
+
+    button.addEventListener('click', () => {
+        const challenge = challengeInput.value; // Get the value from the input field
+        const activity = activityInput.value;
+        fetch('http://127.0.0.1:5000/addcheck', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({challenge: challenge, activity:activity }) // Convert the activity object to a JSON string
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+});
