@@ -62,3 +62,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+/*Get a challenge (passing id)*/
+document.addEventListener("DOMContentLoaded", function () {
+    var challengeId = document.getElementById('id');
+    var button = document.getElementById('seechallenges');
+    button.addEventListener('click', function () {
+        fetch('http://127.0.0.1:5000/getchallenge/' + challengeId.value, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+            console.log('Success:', data);
+        })
+            .catch(function (error) {
+            console.error('Error:', error);
+        });
+    });
+});

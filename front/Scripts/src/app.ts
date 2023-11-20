@@ -72,3 +72,25 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+/*Get a challenge (passing id)*/
+document.addEventListener("DOMContentLoaded", () => {
+    const challengeId = document.getElementById('id') as HTMLInputElement
+    const button = document.getElementById('seechallenges') as HTMLButtonElement;
+
+    button.addEventListener('click', () => {
+        fetch('http://127.0.0.1:5000/getchallenge/'+ challengeId.value, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    });
+});
+
