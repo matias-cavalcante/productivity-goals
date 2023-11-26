@@ -1,7 +1,7 @@
 /*Addactivity is pretty equal to Startchallenge*/
 
 /*Main panel to display TABLE and posibly other elements*/
-const mainPanel = document.getElementById('main-content') as HTMLDivElement;
+const mainPanel = document.getElementById('right-wide-display') as HTMLDivElement;
 
 /*Add activity block html elements*/ 
 const addActivityInputContainer = document.getElementById('add-content-input-container') as HTMLDivElement;
@@ -10,7 +10,7 @@ const addActivityInputField = document.getElementById('activity-input') as HTMLI
 
 /*Buttons in column*/
 
-const addactivityColumn = document.getElementById('addActivity') as HTMLButtonElement;
+const addactivityColumn = document.getElementById('column-add-activity') as HTMLButtonElement;
 
 /*Click add activity button on column and display panel to do so*/
 document.addEventListener("DOMContentLoaded", () =>{

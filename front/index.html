@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" type = "text/css" href= "Styles.css">
     <title>Document</title>
 </head>
-<body>
-    <h1 id = "title">PRODUCTIVITY APP</h1>
-    
+
+<body>    
+
     <section id = "main-panel">
+
         <div class="sidebar">
-            <button class = "side-button" id="addActivity">ADD ACTIVITY</button>
-            <!-- Other buttons here -->
+            <button class = "side-button" id="column-add-activity">ADD ACTIVITY</button>
         </div>
-        <div id="main-content">
-            <!-- Dynamic content will be loaded here -->
+
+        <div id="right-wide-display">
 
             <div id = "add-content-input-container">
-                <input type = "text" id = "activity-input" class = "small-window-input" placeholder="Type the activity name here">
+                <input id = "activity-input" class = "small-window-input" type = "text"
+                placeholder="Type the activity name here">
                 <button id = "add-act" class = "small-window-button">Add activity</button>
                 <button id = "finish-adding-act" class = "small-window-button">Finish</button>
             </div>
@@ -27,33 +29,7 @@
 
     </section>
 
-    <!--
-    <section id = "main-screen">
-        <div id = "buttons-menu">
-
-            <input type="text" id="myInput" placeholder="Writte activity here...">
-            <button type = "button" id = "addactivity">Add activity</button>
-
-
-            <button id = "seeactivity">See activities</button>
-
-            <input type="number" id="quantity" name="quantity" min="1" max="31">
-            <button id = "startchallenge">Start challenge</button>
-
-            <input type="text" id="id" name="id">
-            <button id = "seechallenges">See challenges</button>
-
-            <input type="text" id="challengeid" name="id" placeholder="challengeid">
-            <input type="text" id="activityid" name="id" placeholder="activityid">
-            <button id = "addcheck">Add a check</button>
-        </div>
-
-        <div id = "content-panel">
-            <h1>Panel</h1>
-        </div>
-
-    </section>
-    -->
     <script src="Scripts/src/app.js"></script>
 </body>
+
 </html>
