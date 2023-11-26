@@ -1,6 +1,14 @@
 /*Addactivity is pretty equal to Startchallenge*/
 /*Add activity block*/
 document.addEventListener("DOMContentLoaded", function () {
+    var addactivityButton = document.getElementById('addActivity');
+    var activityInput = document.getElementById('add-content-input');
+    addactivityButton.addEventListener('click', function () {
+        activityInput.style.display = "inline";
+        activityInput.style.backgroundColor = "red";
+    });
+});
+document.addEventListener("DOMContentLoaded", function () {
     var myInput = document.getElementById("myInput");
     var button = document.getElementById('addactivity');
     button.addEventListener('click', function () {

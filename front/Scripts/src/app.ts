@@ -2,6 +2,16 @@
 
 /*Add activity block*/ 
 
+
+document.addEventListener("DOMContentLoaded", () =>{
+    const addactivityButton = document.getElementById('addActivity') as HTMLButtonElement;
+    const activityInput = document.getElementById('add-content-input') as HTMLDivElement;
+    addactivityButton.addEventListener('click', () => {
+        activityInput.style.display = "inline"
+        activityInput.style.backgroundColor = "red";
+    });
+})
+
 document.addEventListener("DOMContentLoaded", () => {
     const myInput = document.getElementById("myInput") as HTMLInputElement;
     const button = document.getElementById('addactivity') as HTMLButtonElement;

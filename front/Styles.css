@@ -59,3 +59,10 @@ body{
     border-radius: 10px;
     background-color: white;
 }
+
+#add-content-input{
+    display: none;
+    width: 50%;
+    height: 30%;
+    background-color: red;
+}
