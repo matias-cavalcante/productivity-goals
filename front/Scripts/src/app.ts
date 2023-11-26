@@ -1,14 +1,22 @@
 /*Addactivity is pretty equal to Startchallenge*/
 
-/*Add activity block*/ 
+/*Main panel to display TABLE and posibly other elements*/
+const mainPanel = document.getElementById('main-content') as HTMLDivElement;
+
+/*Add activity block html elements*/ 
+const addactivityButton = document.getElementById('addActivity') as HTMLButtonElement;
+const activityInput = document.getElementById('add-content-input') as HTMLDivElement;
+
+/*See activities block html elements*/
 
 
 document.addEventListener("DOMContentLoaded", () =>{
-    const addactivityButton = document.getElementById('addActivity') as HTMLButtonElement;
-    const activityInput = document.getElementById('add-content-input') as HTMLDivElement;
     addactivityButton.addEventListener('click', () => {
-        activityInput.style.display = "inline"
-        activityInput.style.backgroundColor = "red";
+        activityInput.style.display = "flex"
+        activityInput.style.flexDirection = "column"
+        activityInput.style.justifyContent = "space-evenly";
+        activityInput.style.alignItems = "center";
+        activityInput.style.backgroundColor = "white";
     });
 })
 
