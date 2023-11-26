@@ -2,16 +2,39 @@
 /*Main panel to display TABLE and posibly other elements*/
 var mainPanel = document.getElementById('main-content');
 /*Add activity block html elements*/
-var addactivityButton = document.getElementById('addActivity');
-var activityInput = document.getElementById('add-content-input');
-/*See activities block html elements*/
+var addActivityInputContainer = document.getElementById('add-content-input-container');
+var addActivityConfirm = document.getElementById('add-act');
+var addActivityInputField = document.getElementById('activity-input');
+/*Buttons in column*/
+var addactivityColumn = document.getElementById('addActivity');
+/*Click add activity button on column and display panel to do so*/
 document.addEventListener("DOMContentLoaded", function () {
-    addactivityButton.addEventListener('click', function () {
-        activityInput.style.display = "flex";
-        activityInput.style.flexDirection = "column";
-        activityInput.style.justifyContent = "space-evenly";
-        activityInput.style.alignItems = "center";
-        activityInput.style.backgroundColor = "white";
+    addactivityColumn.addEventListener('click', function () {
+        addActivityInputContainer.style.display = "flex";
+        addActivityInputContainer.style.flexDirection = "column";
+        addActivityInputContainer.style.justifyContent = "space-evenly";
+        addActivityInputContainer.style.alignItems = "center";
+        addActivityInputContainer.style.backgroundColor = "white";
+    });
+});
+/*Add activity from panel*/
+document.addEventListener("DOMContentLoaded", function () {
+    addActivityConfirm.addEventListener('click', function () {
+        var activityToAdd = addActivityInputField.value;
+        fetch('http://127.0.0.1:5000/createactivity', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ activity: activityToAdd }) // Convert the activity object to a JSON string
+        })
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+            console.log('Success:', data);
+        })
+            .catch(function (error) {
+            console.error('Error:', error);
+        });
     });
 });
 document.addEventListener("DOMContentLoaded", function () {

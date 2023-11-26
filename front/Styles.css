@@ -60,7 +60,7 @@ body{
     background-color:#0F0F0F ;
 }
 
-#add-content-input{
+#add-content-input-container{
     /*Correct dimentions later. These ones are simply for testing*/
     display: none;
     position: relative;
