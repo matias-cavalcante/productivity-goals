@@ -8,7 +8,8 @@ body{
 /*Main panel is the whole rectangle where the buttons in the left column and the space to the right are*/
 
 #main-panel, .column-side-button, #right-wide-display,
-#add-content-input-container, .small-window-input, .small-window-button{
+#add-content-input-container, .small-window-input, .small-window-button,
+.success-card{
     border-radius: 10px;
 }
 
@@ -57,7 +58,9 @@ body{
     background-color:#0F0F0F ;
 }
 
-#add-content-input-container{
+/*Here confirmation for successful operations will be displayed*/
+
+.success-card, #add-content-input-container{
     /*Correct dimentions later. These ones are simply for testing*/
     height: 80%;
     width: 50%;
@@ -66,6 +69,35 @@ body{
     left: 25%;
     top: 10%;
 }
+
+.success-card{
+    background-color: #232D3F;
+    display: block;
+    text-align: center;
+}
+
+#level-one{
+    height: 20%;
+    padding-top: 1%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    color: white;
+}
+
+#level-one h3{
+    font-size: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#level-two{
+    padding-top: 15%;
+}
+
+#level-two img{
+    max-width: 100px;
+}
+
+/*--------------------------------*/
 
 .small-window-input{
     min-width: 100px;
