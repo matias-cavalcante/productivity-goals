@@ -71,9 +71,12 @@ body{
 }
 
 .success-card{
+    position: absolute;
     background-color: #232D3F;
-    display: block;
     text-align: center;
+    /**/
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
 #level-one{
@@ -95,6 +98,18 @@ body{
 
 #level-two img{
     max-width: 100px;
+}
+
+/*Testing this*/
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s linear;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s linear;
 }
 
 /*--------------------------------*/

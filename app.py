@@ -14,15 +14,40 @@ challenges_ops = ChallengesOperations()
 
 # ******************** ACTIVITIES ENDPOINTS ********************
 
+"""
+def verifyActivityInserted(activity):
+    query = {"name": activity}
+    if type(activities_ops.find_one(query)) == dict:
+        return True
 
 @app.route('/createactivity', methods=['POST'])
 def create_activity():
-    """Receives and passes an activity to be inserted in the activities collection"""
+    Receives and passes an activity to be inserted in the activities collection
     data = request.get_json() or {}
     activity = data.get('activity')
-    # print(f"Received activity: {activity}")
     activity_id = activities_ops.insert_activity(activity)
-    return jsonify({"message": "Activity received", "activity": activity}), 200
+    confirmed = verifyActivityInserted(activity)
+    if confirmed == True:
+        return jsonify({"message": "Activity received", "activity": activity}), 200
+    else:
+        abort(400, description="Seems like that value was not successfully inserted")
+"""
+
+
+@app.route('/createactivity', methods=['POST'])
+def create_activity():
+    data = request.get_json() or {}
+    activity = data.get('activity')
+
+    # Insert the activity and get the result
+    result = activities_ops.insert_activity(activity)
+
+    # If insertion was successful, result will not be None
+    if result:
+        return jsonify({"message": "Activity received", "activity": activity}), 201
+    else:
+        # If result is None, insertion failed
+        return jsonify({"error": "Activity insertion failed"}), 400
 
 
 @app.route('/seeactivities', methods=['GET'])

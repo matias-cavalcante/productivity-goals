@@ -1,15 +1,17 @@
+import { showMessage } from './helperfile.js';
 /*Main panel to display TABLE and posibly other elements*/
-var mainPanel = document.getElementById('right-wide-display');
+const mainPanel = document.getElementById('right-wide-display');
 /*Add activity block html elements*/
-var addActivityInputContainer = document.getElementById('add-content-input-container');
-var addActivityInputField = document.getElementById('activity-input');
-var addActivityConfirm = document.getElementById('add-act');
+const addActivityInputContainer = document.getElementById('add-content-input-container');
+const addActivityInputField = document.getElementById('activity-input');
+const addActivityConfirm = document.getElementById('add-act');
+const activityAddOk = document.getElementById('activity-inserted');
 /*Buttons in column*/
-var addactivityColumn = document.getElementById('column-add-activity');
+const addactivityColumn = document.getElementById('column-add-activity');
 /*---------------------------------------------------------------------------------------------*/
 /*ACTIVITIES*/
 /*Click add activity button on column and display panel to do so*/
-addactivityColumn.addEventListener('click', function () {
+addactivityColumn.addEventListener('click', () => {
     addActivityInputContainer.style.display = "flex";
     addActivityInputContainer.style.flexDirection = "column";
     addActivityInputContainer.style.justifyContent = "space-evenly";
@@ -17,8 +19,9 @@ addactivityColumn.addEventListener('click', function () {
     addActivityInputContainer.style.backgroundColor = "white";
 });
 /*Add activity from panel*/
-addActivityConfirm.addEventListener('click', function () {
-    var activityToAdd = addActivityInputField.value;
+/*
+addActivityConfirm.addEventListener('click', () => {
+    let activityToAdd = addActivityInputField.value;
     fetch('http://127.0.0.1:5000/createactivity', {
         method: 'POST',
         headers: {
@@ -26,11 +29,31 @@ addActivityConfirm.addEventListener('click', function () {
         },
         body: JSON.stringify({ activity: activityToAdd }) // Convert the activity object to a JSON string
     })
-        .then(function (response) { return response.json(); })
-        .then(function (data) {
+    .then(response => response.json())
+
+    .then(data => {
         console.log('Success:', data);
     })
-        .catch(function (error) {
+    .catch((error) => {
         console.error('Error:', error);
+    });
+});*/
+/* Add activity from panel */
+addActivityConfirm.addEventListener('click', () => {
+    let activityToAdd = addActivityInputField.value;
+    fetch('http://127.0.0.1:5000/createactivity', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ activity: activityToAdd }) // Convert the activity object to a JSON string
+    })
+        .then(data => {
+        console.log('Success:', data);
+        showMessage("Activity added successfully!", true);
+    })
+        .catch((error) => {
+        console.error('Error:', error);
+        showMessage("Failed to add activity.", false);
     });
 });
